@@ -6,17 +6,17 @@ import random
 TB_URL = "http://localhost:8080"
 TOKEN = "foDOp2t3GFYLqy54BIcq"
 
-# Начальные значения
-temp_supply = 18.0      # Температура приточного воздуха
-temp_outdoor = -5.0     # Наружная температура
-temp_setpoint = 22.0    # Уставка
-filter_pressure = 50.0  # Перепад давления на фильтре (Па)
-humidity = 45.0         # Влажность %
-fan_supply_rpm = 1500   # Обороты приточного вентилятора
-fan_exhaust_rpm = 1400  # Обороты вытяжного вентилятора
-damper_pos = 100.0      # Положение заслонки %
-heat_valve = 0.0        # Клапан нагрева %
-cool_valve = 0.0        # Клапан охлаждения %
+
+temp_supply = 18.0      # в
+temp_outdoor = -5.0     # nт
+temp_setpoint = 22.0    # u
+filter_pressure = 50.0  # pa
+humidity = 45.0         # bl %
+fan_supply_rpm = 1500   # ob1
+fan_exhaust_rpm = 1400  # ob2
+damper_pos = 100.0      
+heat_valve = 0.0     
+cool_valve = 0.0       
 is_running = True
 is_alarm = False
 filter_clogged = False
@@ -31,7 +31,7 @@ def send_telemetry(data):
     else:
         print(f"❌ Ошибка: {response.status_code}")
 
-print("🚀 Эмулятор ПВУ запущен...")
+print("работает")
 
 while True:
     tick += 1
@@ -42,7 +42,7 @@ while True:
     cool_valve = max(0, min(100, -diff * 5))
     temp_supply += diff * 0.05 + random.uniform(-0.2, 0.2)
 
-    # Наружная температура меняется медленно
+    # nt  меняется медленно
     temp_outdoor += random.uniform(-0.1, 0.1)
 
     # Фильтр постепенно засоряется
@@ -54,11 +54,11 @@ while True:
         filter_clogged = False
         is_alarm = False
 
-    # Обороты вентиляторов
+    # ob
     fan_supply_rpm = 1500 + random.randint(-50, 50)
     fan_exhaust_rpm = 1400 + random.randint(-50, 50)
 
-    # Влажность
+    # b
     humidity += random.uniform(-0.3, 0.3)
     humidity = max(20, min(80, humidity))
 
